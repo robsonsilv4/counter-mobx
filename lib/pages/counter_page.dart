@@ -1,6 +1,10 @@
+import 'package:counter_mobx/store/counter/counter.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
 
 class CounterPage extends StatelessWidget {
+  final Counter counter = Counter();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -17,10 +21,12 @@ class CounterPage extends StatelessWidget {
                 fontSize: 30.0,
               ),
             ),
-            Text(
-              '0',
-              style: TextStyle(
-                fontSize: 42.0,
+            Observer(
+              builder: (_) => Text(
+                '${counter.count}',
+                style: TextStyle(
+                  fontSize: 42.0,
+                ),
               ),
             ),
             Row(
@@ -29,12 +35,16 @@ class CounterPage extends StatelessWidget {
                 FlatButton.icon(
                   icon: Icon(Icons.add),
                   label: Text('Adicionar'),
-                  onPressed: () {},
+                  onPressed: () {
+                    counter.increment();
+                  },
                 ),
                 FlatButton.icon(
                   icon: Icon(Icons.remove),
                   label: Text('Diminuir'),
-                  onPressed: () {},
+                  onPressed: () {
+                    counter.decrement();
+                  },
                 )
               ],
             ),
