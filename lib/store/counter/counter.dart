@@ -15,6 +15,8 @@ abstract class _Counter with Store {
 
   @action
   void decrement() {
-    count--;
+    if (count != 0) {
+      count--;
+    }
   }
 }
